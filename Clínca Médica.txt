@@ -1,0 +1,41 @@
+CREATE TABLE Paciente
+(
+CPF VARCHAR(14) PRIMARY KEY,
+Nome_paciente VARCHAR(40),
+Telefone VARCHAR(14),
+Numero_plano INT,
+Nome_plano VARCHAR(20),
+Tipo_plano VARCHAR(10),
+);
+
+CREATE TABLE Medico
+(
+CRM INT PRIMARY KEY,
+Nome_medico VARCHAR(30),
+Especialidade VARCHAR(20)
+);
+
+CREATE TABLE Exame
+(
+Codigo INT PRIMARY KEY,
+Especificacao VARCHAR(20),
+Preco MONEY
+);
+
+CREATE TABLE Consulta
+(
+Numero_consulta_id INT PRIMARY KEY IDENTITY,
+Data_consulta DATE,
+Horario_consulta TIME,
+fk_paciente_CPF VARCHAR(14) FOREIGN KEY REFERENCES Paciente(CPF),
+fk_medico_crm INT FOREIGN KEY REFERENCES Medico(CRM),
+);
+
+CREATE TABLE Pedido_exame
+(
+Numero_pedido INT PRIMARY KEY IDENTITY,
+Resultado VARCHAR(40),
+Data_exame DATE,
+Vlaor_pagar MOney,
+fk_consulta_numero_consulta INT FOREIGN KEY REFERENCES Consulta(Numero_consulta_id)
+);
